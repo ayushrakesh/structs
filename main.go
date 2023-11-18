@@ -13,6 +13,8 @@ type person struct {
 	contact   contactInfo
 }
 
+type deck []string
+
 func main() {
 
 	// david := person{
@@ -37,5 +39,32 @@ func main() {
 		},
 	}
 
-	fmt.Printf("%+v", kane)
+	kane.updateName("kane2")
+	kane.print()
+
+	cards := deck{"King", "Queen", "Joker", "Ace"}
+
+	cards.updateDeck("Two")
+	cards.print()
+
+}
+
+// function to print person
+func (p person) print() {
+	fmt.Printf("%+v\n", p)
+}
+
+// function to update person first name -> need pointer to update struct because it is a value type
+func (p *person) updateName(newFirstName string) {
+	(*p).firstName = newFirstName
+}
+
+// function to print a deck
+func (d deck) print() {
+	fmt.Printf("%+v\n", d)
+}
+
+// function to update deck -> no pointers needed because slice is a reference types
+func (d deck) updateDeck(newCard string) {
+	d[0] = newCard
 }
